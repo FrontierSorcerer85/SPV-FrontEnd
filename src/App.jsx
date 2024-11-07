@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import { Redirect, Route } from "wouter";
 import Home from "./componentes/Home";
 import Formulario from "./componentes/primer_form";
 
