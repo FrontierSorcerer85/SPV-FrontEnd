@@ -1,4 +1,5 @@
 import { Component } from "react";
+import { Link } from "wouter";
 
 export default class Boton extends Component {
     constructor(props) {

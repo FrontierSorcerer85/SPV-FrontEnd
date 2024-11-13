@@ -1,7 +1,9 @@
 import { Component } from 'react';
+import { Redirect, Route } from "wouter";
 import Home from "./componentes/Home";
 import Formulario from "./componentes/primer_form";
-
+import Login from "./componentes/Login";
+import Alumnos from "./componentes/Alumnos";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -50,7 +52,9 @@ export default class App extends Component {
           <Route path="/formulario">
             <Formulario onSubmit={(data) => console.log(data)} />
           </Route>
-          {/* Puedes agregar más rutas según las secciones */}
+          <Route path="*">
+            <Redirect to="/" />
+          </Route>
         </div>
 
         {/* Footer */}
