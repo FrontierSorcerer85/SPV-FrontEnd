@@ -10,7 +10,7 @@ export default class Login extends Component {
     };
   }
 
-  handleChange = (e) => {
+  cambioManual = (e) => {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
@@ -35,7 +35,7 @@ export default class Login extends Component {
             id="username"
             name="username"
             value={this.state.username}
-            onChange={this.handleChange}
+            onChange={this.cambioManual}
             required
           />
         </div>
@@ -47,7 +47,7 @@ export default class Login extends Component {
             id="password"
             name="password"
             value={this.state.password}
-            onChange={this.handleChange}
+            onChange={this.cambioManual}
             required
           />
         </div>

@@ -17,7 +17,7 @@ export default class Formulario extends Component {
         };
     }
 
-    handleChange = (e) => {
+    cambioManual = (e) => {
         const { name, value } = e.target;
         this.setState({ [name]: value });
     };
@@ -33,6 +33,14 @@ export default class Formulario extends Component {
         return (
             <form className="container bg-light p-5 rounded shadow" onSubmit={this.handleSubmit}>
                 <h2 className="mb-4 text-center">Registro de Persona</h2>
+                <label htmlFor={field} className="form-label">
+             {field
+                .replace('_', ' ')
+                .toUpperCase()
+                .replace('IDP', 'ID Persona')
+                .replace('DNI', 'Documento')}
+            </label>
+
                 
                 {Object.keys(this.state).map((field, index) => (
                     <div className="form-group mb-3" key={index}>
@@ -43,7 +51,7 @@ export default class Formulario extends Component {
                             id={field}
                             name={field}
                             value={this.state[field]}
-                            onChange={this.handleChange}
+                            onChange={this.cambioManual}
                             required={['nombre', 'apellido', 'DNI'].includes(field)}
                         />
                     </div>
