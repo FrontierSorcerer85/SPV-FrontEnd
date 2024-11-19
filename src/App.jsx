@@ -55,6 +55,40 @@ export default class App extends Component {
           <Route path="*">
             <Redirect to="/" />
           </Route>
+          <Route path="/asistencias">
+  <div className="text-center">
+    <h2 className="text-light">Registrar Asistencias</h2>
+    <p className="text-light">En construcción...</p>
+  </div>
+</Route>
+<Route path="/cursos">
+  <div className="text-center">
+    <h2 className="text-light">Cursos Disponibles</h2>
+    <p className="text-light">En construcción...</p>
+  </div>
+</Route>
+<Route path="/estudiantes">
+  <Alumnos />
+</Route>
+<Route path="/profesores">
+  <div className="text-center">
+    <h2 className="text-light">Gestión de Profesores</h2>
+    <p className="text-light">En construcción...</p>
+  </div>
+</Route>
+<Route path="/reportes">
+  <div className="text-center">
+    <h2 className="text-light">Generar Reportes</h2>
+    <p className="text-light">En construcción...</p>
+  </div>
+</Route>
+<Route path="/configuracion">
+  <div className="text-center">
+    <h2 className="text-light">Configuración</h2>
+    <p className="text-light">En construcción...</p>
+  </div>
+</Route>
+
         </div>
 
         {/* Footer */}
