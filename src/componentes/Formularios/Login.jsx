@@ -33,7 +33,7 @@ export default class Login extends Component {
                         id="username"
                         name="username"
                         value={this.state.username}
-                        onChange={this.handleInputChange}
+                        onChange={this.CambioDeInput}
                         className="form-input"
                         placeholder="Ingresa tu nombre de usuario"
                         required
@@ -47,7 +47,7 @@ export default class Login extends Component {
                         id="password"
                         name="password"
                         value={this.state.password}
-                        onChange={this.handleInputChange}
+                        onChange={this.CambioDeInput}
                         className="form-input"
                         placeholder="Ingresa tu contraseña"
                         required
