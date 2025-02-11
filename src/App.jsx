@@ -10,21 +10,34 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      log: false
+      Logeado: false,
+      cursosAsignados: []
     };
   }
 
+  Login = () => {
+
+    const cursosEjemplo = [
+      { id: 1, nombre: "1°2", grado: "Primer año" },
+      { id: 2, nombre: "1°7", grado: "Primer año" },
+      { id: 3, nombre: "7°2", grado: "Séptimo año" },
+      { id: 4, nombre: "7°3", grado: "Séptimo año" },
+    ];
+
+    this.setState({ Logeado: true, cursosAsignados: cursosEjemplo });
+  };
+
+  Logout = () => {
+    this.setState({ Logeado: false });
+  };
+
   render() {
+    const { Logeado, cursosAsignados} = this.state;
     return (
     <div>
-      <Header />
-      {this.state.log ? <> 
-        <Home />
-
-        </>:  
-        <Login />
-        }
-      <Footer />
+      <Header Logeado={Logeado} onLogout={this.Logout} />
+        {Logeado ? <Home cursos={cursosAsignados}/> : <Login onLogin={this.Login} />}
+        <Footer />
     </div>
     );
   }

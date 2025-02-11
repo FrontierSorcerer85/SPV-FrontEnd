@@ -1,10 +1,86 @@
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Rethink Sans", serif;
+}
 
-.Home{
-  color: #004A8D;
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px; /* Ajusta este valor según la altura de tu header */
+  padding-bottom: 60px; /* Ajusta este valor según la altura de tu footer */
+}
+
+/* App.css o Home.css */
+/* Home.css */
+
+
+.Home h2 {
+  font-size: 2em;
+  margin-bottom: 10px;
+  color: #1E3E8E;
+}
+
+.Home h4 {
+  font-size: 1.2em;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+.Cursos {
+  margin-top: 20px;
+  text-align: left;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.Cursos h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+  color: #033059;
+  padding-bottom: 10px;
+}
+
+.grupo-curso {
+  margin-bottom: 20px;
+}
+
+.grupo-curso h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: #444;
+  padding: 10px;
+  border-bottom: 2px solid #ddd;
+}
+
+.lista-cursos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: flex-start;
+}
+
+.curso-item {
+  background-color: #70A4BE;
+  padding: 15px;
+  border-radius: 5px;
+  text-align: center;
+  flex: 1 1 calc(33.333% - 20px); /* Tres columnas con espacio entre ellas */
+  box-sizing: border-box;
+  font-size: 1.1em;
+  transition: background-color 0.3s ease;
+}
+
+.curso-item:hover {
+  background-color: #8de8f4;
+  cursor: pointer;
 }
 
 .footer {
-  background-color: #002855;
+  background-color: #033059;
   color: white;
   padding: 10px;
   text-align: center;
@@ -20,7 +96,7 @@
 
 .header {
   width: 100%;
-  background-color: #002855; /* Azul del diseño */
+  background-color: #033059;
   color: white;
   display: flex;
   align-items: center;
@@ -40,11 +116,11 @@
   justify-content: space-between;
 }
 
-
 .logo-titulo {
   display: flex;
   align-items: center;
   gap: 10px;
+  cursor: pointer;
 }
 
 .header-logo {
@@ -56,7 +132,7 @@
 .header-titulo {
   font-size: 24px;
   margin: 0;
-  font-family: "Arial", sans-serif;
+  font-family: "Rhodium Libre", serif;
 }
 
 .header-nav .nav-list {
@@ -67,75 +143,66 @@
   padding: 0;
 }
 
-.nav-list li {
-  font-size: 18px;
+.icono-cerrar {
+  color: red;
+  font-size: 24px;
+  cursor: pointer;
 }
 
-.nav-list li a {
-  text-decoration: none;
-  color: white;
-  font-weight: bold;
-  transition: color 0.3s ease;
-}
-
-.nav-list li a:hover {
-  color: #FFCF33;
-}
-
-/* Contenedor del formulario */
-.form-container {
+.login-container {
   width: 400px;
-  margin: 100px auto; /* Centra el formulario en la pantalla */
+  margin: 150px auto;
   padding: 20px;
   background-color: #FFFFFF;
-  border-radius: 10px;
+  border-radius: 30px;
   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
   text-align: center;
-  font-family: Arial, sans-serif;
   background-color: #1E3E8E;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 10px;
 }
 
-/* Título del formulario */
-.form-title {
+.login-title {
   font-size: 24px;
   margin-bottom: 20px;
-  color: #000000;
+  color: #fefefe;
 }
 
-/* Etiquetas del formulario */
-.form-label {
+.login-label {
   display: block;
   text-align: left;
+  padding-left: 35px;
   margin: 10px 0 5px;
   color: #000000;
   font-weight: bold;
 }
 
-/* Campos de entrada */
-.form-input {
-  width: 100%;
-  padding: 10px;
+.login-input {
+  width: 80%;
+  padding: 8px;
   margin-bottom: 15px;
   border: 1px solid #CCCCCC;
-  border-radius: 5px;
+  border-radius: 7px;
   box-sizing: border-box;
   font-size: 16px;
 }
 
-/* Botón de inicio de sesión */
-.form-button {
-  width: 100%;
+.login-button {
+  width: 90%;
   padding: 10px;
   background-color: #01244b;
   color: white;
-  font-size: 16px;
+  font-size: 20px;
   font-weight: bold;
   border: none;
-  border-radius: 15px;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-.form-button:hover {
-  background-color: #004A8D;
+.login-button:hover {
+  background-color: #0064c2;
 }

@@ -1,17 +1,13 @@
 import { Component } from "react";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 export default class Header extends Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            log: false
-        };
-    }
+
 
     render() {
+        const { Logeado, onLogout } = this.props;
         return (
             <header className="header">
-                {this.state.log ? (
                     <div className="header-container">
                         <div className="logo-titulo">
                             <img 
@@ -22,14 +18,20 @@ export default class Header extends Component {
                             <h1 className="header-titulo">Planilla Virtual</h1>
                         </div>
                     </div>
-                ) : (
+                    
                     <nav className="header-nav">
                         <ul className="nav-list">
-                            <li><a href="#home">Home</a></li>
-                            <li><a href="#logout">Logout</a></li>
+                        {Logeado && (
+                            <li>
+                                <i 
+                                    className="bi bi-box-arrow-right icono-cerrar" 
+                                    onClick={onLogout}
+                                    style={{ cursor: 'pointer' }}
+                                ></i>
+                            </li>
+                        )}
                         </ul>
                     </nav>
-                )}
             </header>
         );
     }

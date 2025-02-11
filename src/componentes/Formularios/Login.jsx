@@ -4,56 +4,56 @@ export default class Login extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: "",
-            password: ""
+            nombreUsuario: "", 
+            contrasena: ""
         };
     }
 
-    CambioDeInput = (event) => {
-        const { name, value } = event.target;
+   Cambio = (e) => {
+        const { name, value } = e.target;
         this.setState({ [name]: value });
     };
 
-    handleSubmit = (event) => {
-        event.preventDefault();
-        // Aquí puedes agregar lógica para manejar el inicio de sesión
+   Envio = (e) => {
+        e.preventDefault();
         console.log("Iniciando sesión con:", this.state);
+        this.props.onLogin();
     };
 
     render() {
         return (
-            <div className="form-container">
-                <h2 className="form-title">Inicia Sesión</h2>
-                <form className="login-form" onSubmit={this.handleSubmit}>
-                    <label htmlFor="username" className="form-label">
+            <div className="login-container">
+                <h2 className="login-title">Inicia Sesión</h2>
+                <form className="login-form" onSubmit={this.Envio}>
+                    <label htmlFor="nombreUsuario" className="login-label">
                         Nombre de usuario
                     </label>
                     <input
                         type="text"
-                        id="username"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.CambioDeInput}
-                        className="form-input"
+                        id="nombreUsuario"
+                        name="nombreUsuario"
+                        value={this.state.nombreUsuario}
+                        onChange={this.Cambio}
+                        className="login-input"
                         placeholder="Ingresa tu nombre de usuario"
                         required
                     />
 
-                    <label htmlFor="password" className="form-label">
+                    <label htmlFor="contrasena" className="login-label">
                         Contraseña
                     </label>
                     <input
                         type="password"
-                        id="password"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.CambioDeInput}
-                        className="form-input"
+                        id="contrasena"
+                        name="contrasena"
+                        value={this.state.contrasena}
+                        onChange={this.Cambio}
+                        className="login-input"
                         placeholder="Ingresa tu contraseña"
                         required
                     />
 
-                    <button type="submit" className="form-button">Entrar</button>
+                    <button type="submit" className="login-button">Entrar</button>
                 </form>
             </div>
         );
