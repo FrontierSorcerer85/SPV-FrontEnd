@@ -31,9 +31,6 @@ export default class Home extends Component {
 
         return (
             <div className='Home'>
-              <br />
-              <br />
-              <br />
                 <h2>Bienvenido al Sistema de Planilla Virtual</h2>
                 <h4>Gestiona la información de los estudiantes!</h4>
 
