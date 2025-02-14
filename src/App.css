@@ -1,6 +1,4 @@
 body {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: "Rethink Sans", serif;
 }
@@ -83,41 +81,42 @@ body {
   cursor: pointer;
 }
 
+/* Estilos para MenuCurso */
 .MenuCurso {
   padding: 20px;
   text-align: center;
-  max-width: 800px; /* Limitar el ancho máximo del contenido */
-  margin-top: 20px; /* Espacio superior */
-  margin-left: 300px;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* Centrar horizontalmente */
-  justify-content: center; /* Centrar verticalmente (opcional) */
+  margin: 150px; /* Centrar horizontalmente */
+  margin-top: 110px;
 }
 
 .MenuCurso h2 {
-  font-size: 2em;
-  color: #1E3E8E;
-  margin-bottom: 20px;
+  font-size: 2.5em; /* Tamaño más grande */
+  color: #000000;
+  margin-bottom: 30px; /* Más espacio debajo del título */
+  font-weight: bold; /* Texto en negrita */
 }
 
-.opciones {
-  max-width: 600px; /* Aumentar el ancho máximo */
-  width: 100%; /* Ocupar todo el ancho disponible */
-  padding: 20px; /* Espaciado interno */
+.opciones-container {
+  display: flex;
+  justify-content: space-between; /* Separar las secciones */
+  gap: 20px; /* Espacio entre las secciones */
+}
+
+.opcion-izquierda, .opcion-derecha {
+  padding: 20px;
   background-color: #f9f9f9; /* Fondo claro */
   border-radius: 10px; /* Bordes redondeados */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
 }
 
-.opciones h3 {
+.opcion-izquierda h3, .opcion-derecha h3 {
   font-size: 1.5em;
   color: #033059;
-  margin-bottom: 15px; /* Más espacio debajo del título */
+  margin-bottom: 20px; /* Más espacio debajo del título */
 }
 
-.opciones button {
-  padding: 12px;
+.opcion-izquierda button, .opcion-derecha button {
+  padding: 20px;
   background-color: #4984C7;
   border: none;
   border-radius: 8px; /* Bordes más redondeados */
@@ -128,9 +127,58 @@ body {
   width: 100%; /* Botones ocupen todo el ancho disponible */
 }
 
-.opciones button:hover {
+.opcion-izquierda button:hover, .opcion-derecha button:hover {
   background-color: #60b2d0;
 }
+
+/* Estilos para la tabla de horarios */
+.horarios-container {
+  margin-top: 100px; /* Espacio superior */
+  padding: 30px;
+  background-color: #f9f9f9; /* Fondo claro */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.horarios-container h3 {
+  font-size: 1.8em;
+  color: #033059;
+  margin-bottom: 20px; /* Espacio debajo del título */
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 0; /* Eliminar margen inferior predeterminado */
+  background-color: #f0f0f0; /* Fondo gris para la tabla */
+}
+
+.table th, .table td {
+  text-align: center; /* Centrar el texto en las celdas */
+  vertical-align: middle; /* Alinear verticalmente */
+  padding: 7px; /* Espaciado interno */
+  white-space: normal; /* Permite que el texto se divida en varias líneas */
+  word-wrap: break-word; /* Rompe palabras largas si es necesario */
+  max-width: 150px; /* Limita el ancho máximo de las celdas */
+}
+
+.table th {
+  background-color: #d3d3d3; /* Fondo gris más oscuro para los encabezados */
+  font-weight: bold; /* Texto en negrita */
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05); /* Filas alternas con fondo claro */
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6; /* Borde de la tabla */
+}
+
+.estudiantes-container{
+  margin: 50px;
+}
+
+
 .footer {
   background-color: #033059;
   color: white;
@@ -206,7 +254,6 @@ body {
   color: red; /* Cambiar color al pasar el mouse */
 }
 
-/* App.css o Header.css */
 .icono-regresar {
   color: white; /* Color del ícono */
   font-size: 24px; /* Tamaño del ícono */

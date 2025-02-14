@@ -7,6 +7,7 @@ import Header from './componentes/Header';
 import Home from './componentes/Home/Home';
 import Login from './componentes/Formularios/Login';
 import MenuCurso from './componentes/MenuCurso/MenuCurso';
+import DetalleEstudiante from './componentes/DetallesEstudiante';
 
 export default class App extends Component {
   constructor(props) {
@@ -14,11 +15,33 @@ export default class App extends Component {
     this.state = {
       Logeado: false,
       cursosAsignados: [
-        { id: 1, nombre: "1°2", grado: "Primer año" },
-        { id: 2, nombre: "1°7", grado: "Primer año" },
-        { id: 3, nombre: "7°2", grado: "Séptimo año" },
-        { id: 4, nombre: "7°3", grado: "Séptimo año" },
-        { id: 5, nombre: "1°8", grado: "Primer año" },
+        { 
+          id: 1, 
+          nombre: "1°2", 
+          grado: "Primer año",
+          horario: [
+            { hora: '08:00 - 10:00', Lunes: 'Matemáticas', Martes: 'Literatura', Miércoles: 'Ciencias', Jueves: 'Historia', Viernes: 'Educación Física' },
+            { hora: '10:00 - 12:00', Lunes: 'Física', Martes: 'Química', Miércoles: 'Biología', Jueves: 'Geografía', Viernes: 'Arte' },
+          ],
+          estudiantes: [
+            { id: 1, nombre: 'Joaquín', apellido: 'Sosa Leis', dni: '12353123', telefono: '2901123334' },
+            { id: 2, nombre: 'Kevin', apellido: 'Vargas', dni: '12333123', telefono: '2901213122' },
+          ]
+        },
+        {
+          id: 2, 
+          nombre: "1°7", 
+          grado: "Primer año",
+          horario: [
+            { hora: '08:00 - 10:00', Lunes: 'Matemáticas', Martes: 'Literatura', Miércoles: 'Ciencias', Jueves: 'Historia', Viernes: 'Educación Física' },
+            { hora: '10:00 - 12:00', Lunes: 'Física', Martes: 'Química', Miércoles: 'Biología', Jueves: 'Geografía', Viernes: 'Arte' },
+          ],
+          estudiantes: [
+            { id: 3, nombre: 'Ana', apellido: 'Gómez', dni: '45678901', telefono: '2901123335' },
+            { id: 4, nombre: 'Luis', apellido: 'Pérez', dni: '45678902', telefono: '2901213123' },
+          ]
+        },
+        // Agrega más cursos con sus respectivos estudiantes
       ],
     };
   }
@@ -55,6 +78,10 @@ export default class App extends Component {
           {/* Ruta para el menú de un curso específico */}
           <Route path="/curso/:id">
             {(params) => <MenuCurso id={params.id} cursos={cursosAsignados} />}
+          </Route>
+
+          <Route path="/estudiante/:id">
+            {(params) => <DetalleEstudiante id={params.id} cursos={cursosAsignados} />}
           </Route>
         </Switch>
 
