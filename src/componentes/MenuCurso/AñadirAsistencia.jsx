@@ -1,40 +1,49 @@
 import React, { Component } from 'react';
 
 export default class AñadirAsistencia extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      estudianteSeleccionado: null,
-      diaSeleccionado: 1,
-      asistencia: '0', // 0, 1, 1/2, 1/4
-      estudiantes: [],  // Estado para almacenar los estudiantes
-    };
-  }
+    constructor(props) {
+        super(props);
+      
+        // Obtener el id del curso de los parámetros de la ruta
+        const { id } = this.props.params;
+      
+        // Buscar el curso correspondiente en la lista de cursos
+        const curso = this.props.cursos.find(curso => curso.id === parseInt(id));
+      
+        // Verificar si el curso existe
+        if (!curso) {
+          console.error("Curso no encontrado");
+          return;
+        }
+      
+        // Inicializar el estado con los estudiantes del curso
+        this.state = {
+          estudiantes: curso.estudiantes.map(estudiante => ({
+            ...estudiante,
+            asistencias: Array(31).fill('') // Inicializar asistencias para cada estudiante
+          })),
+          estudianteSeleccionado: null,
+          diaSeleccionado: 1,
+          asistencia: '0', // 0, 1, 1/2, 1/4
+        };
+      }
 
-  componentDidMount() {
-    const { cursos } = this.props;
-    const { id } = this.props.params; // Obtener el id del curso desde params
-    const curso = cursos.find(curso => curso.id === parseInt(id)); // Buscar el curso por id
-
-    if (curso) {
-      this.setState({ estudiantes: curso.estudiantes }); // Actualizar el estado con los estudiantes
-    } else {
-      alert('Curso no encontrado');
-    }
-  }
-
+  // Función para manejar el cambio en el selector de estudiantes
   cambiarEstudiante = (e) => {
     this.setState({ estudianteSeleccionado: e.target.value });
   };
 
+  // Función para manejar el cambio en el selector de días
   cambiarDia = (e) => {
     this.setState({ diaSeleccionado: parseInt(e.target.value) });
   };
 
+  // Función para manejar el cambio en el selector de asistencia
   cambiarAsistencia = (e) => {
     this.setState({ asistencia: e.target.value });
   };
 
+  // Función para agregar la asistencia
   agregarAsistencia = () => {
     const { estudiantes, estudianteSeleccionado, diaSeleccionado, asistencia } = this.state;
 
@@ -59,6 +68,7 @@ export default class AñadirAsistencia extends Component {
   };
 
   render() {
+
     const { estudiantes, estudianteSeleccionado, diaSeleccionado, asistencia } = this.state;
 
     return (
@@ -89,7 +99,7 @@ export default class AñadirAsistencia extends Component {
           </table>
         </div>
 
-        {/* Formulario para añadir asistencia */}
+        {/* Menú para añadir asistencias */}
         <div className="menu-asistencia">
           <h3>Añadir Asistencia</h3>
           <div className="form-group">
