@@ -8,17 +8,21 @@ import Home from './componentes/Home/Home';
 import Login from './componentes/Formularios/Login';
 import MenuCurso from './componentes/MenuCurso/MenuCurso';
 import DetalleEstudiante from './componentes/DetallesEstudiante';
+import ListaAsistencia from './componentes/MenuCurso/ListaAsistencia';
+import AñadirAsistencia from './componentes/MenuCurso/AñadirAsistencia';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
+    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // Recuperar de localStorage
+    console.log("Sesión recuperada de localStorage:", isLoggedIn);
     this.state = {
-      Logeado: false,
+      Logeado: isLoggedIn, // Recuperar la sesión
       cursosAsignados: [
         { 
           id: 1, 
-          nombre: "1°2", 
-          grado: "Primer año",
+          nombre: "7°2", 
+          grado: "Septimo año",
           horario: [
             { hora: '08:00 - 10:00', Lunes: 'Matemáticas', Martes: 'Literatura', Miércoles: 'Ciencias', Jueves: 'Historia', Viernes: 'Educación Física' },
             { hora: '10:00 - 12:00', Lunes: 'Física', Martes: 'Química', Miércoles: 'Biología', Jueves: 'Geografía', Viernes: 'Arte' },
@@ -48,17 +52,22 @@ export default class App extends Component {
 
   // Función para iniciar sesión
   login = () => {
-    this.setState({ Logeado: true });
-  };
+    this.setState({ Logeado: true }, () => {
+    localStorage.setItem('isLoggedIn', 'true');
+    console.log("Sesión guardada en localStorage:", localStorage.getItem('isLoggedIn'));
+  });
+  }
 
   // Función para cerrar sesión
   logout = () => {
-    this.setState({ Logeado: false });
-  };
+    this.setState({ Logeado: false }, () => {
+    localStorage.removeItem('isLoggedIn');
+    console.log("Sesión eliminada de localStorage:", localStorage.getItem('isLoggedIn'));
+  });
+  }
 
   render() {
     const { Logeado, cursosAsignados } = this.state;
-
     return (
       <div>
         {/* Pasar Logeado y logout como props al Header */}
@@ -83,6 +92,15 @@ export default class App extends Component {
           <Route path="/estudiante/:id">
             {(params) => <DetalleEstudiante id={params.id} cursos={cursosAsignados} />}
           </Route>
+
+          <Route path="/curso/:id/asistencias">
+            {(params) => <ListaAsistencia params={params} cursos={cursosAsignados} />}
+          </Route>
+
+          <Route path="/curso/:id/planilla">
+            {(params) => <AñadirAsistencia params={params} cursos={cursosAsignados} />}
+          </Route>
+
         </Switch>
 
         <Footer />

@@ -178,6 +178,116 @@ body {
   margin: 50px;
 }
 
+/* Estilos para la tabla de asistencias */
+.asistencias-container {
+  margin-top: 100px;
+  margin-bottom: 100px;
+  padding: 30px;
+}
+
+.asistencias-container h1 {
+  font-size: 2em;
+  color: #033059;
+  margin-bottom: 20px;
+}
+
+.asistencias-container h3 {
+  font-size: 1.5em;
+  color: #033059;
+  margin-bottom: 20px;
+}
+
+.selector-mes {
+  margin-bottom: 20px;
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.table-bordered {
+  border: 1px solid #dee2e6;
+}
+
+/* Estilos para el contenedor de añadir asistencia */
+.añadir-asistencia-container {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.añadir-asistencia-container h1 {
+  font-size: 2em;
+  color: #033059;
+  margin-bottom: 20px;
+}
+
+/* Estilos para el menú de añadir asistencia */
+.menu-asistencia {
+  margin-top: 20px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.menu-asistencia h3 {
+  font-size: 1.5em;
+  color: #033059;
+  margin-bottom: 20px;
+}
+
+.menu-asistencia .form-group {
+  margin-bottom: 15px;
+}
+
+.menu-asistencia .form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.menu-asistencia .form-group select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.menu-asistencia button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4984C7;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+.menu-asistencia button:hover {
+  background-color: #60b2d0;
+}
+
+/* Estilos para la lista de asistencias */
+.lista-asistencia-container {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
 
 .footer {
   background-color: #033059;

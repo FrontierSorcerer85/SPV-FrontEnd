@@ -15,8 +15,9 @@ export default class MenuCurso extends Component {
     }
 
     // Usar el horario y los estudiantes del curso
-    const horarios = curso.horario;
-    const estudiantes = curso.estudiantes;
+    const horarios = curso.horario || [];
+    const estudiantes = curso.estudiantes || [];
+    const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
     return (
       <div className='MenuCurso'>
@@ -26,13 +27,13 @@ export default class MenuCurso extends Component {
           {/* Sección izquierda: Lista de asistencias */}
           <div className='opcion-izquierda'>
             <h3>Lista de asistencias</h3>
-            <button>Mensuales</button>
+           <Link to={`/curso/${id}/asistencias`} className="btn btn-primary">Mensuales</Link>
           </div>
 
           {/* Sección derecha: Agregar asistencias */}
           <div className='opcion-derecha'>
             <h3>Agregar asistencias</h3>
-            <button>Diarias</button>
+            <Link to={`/curso/${id}/planilla`} className="btn btn-primary">Diarias</Link>
           </div>
         </div>
 
@@ -43,22 +44,18 @@ export default class MenuCurso extends Component {
             <thead>
               <tr>
                 <th>Hora</th>
-                <th>Lunes</th>
-                <th>Martes</th>
-                <th>Miércoles</th>
-                <th>Jueves</th>
-                <th>Viernes</th>
+                {diasSemana.map((dia) => (
+                  <th key={dia}>{dia}</th>
+                ))}
               </tr>
             </thead>
             <tbody>
               {horarios.map((horario, index) => (
                 <tr key={index}>
                   <td>{horario.hora}</td>
-                  <td>{horario.Lunes}</td>
-                  <td>{horario.Martes}</td>
-                  <td>{horario.Miércoles}</td>
-                  <td>{horario.Jueves}</td>
-                  <td>{horario.Viernes}</td>
+                  {diasSemana.map((dia) => (
+                    <td key={dia}>{horario[dia] || '-'}</td>
+                  ))}
                 </tr>
               ))}
             </tbody>
