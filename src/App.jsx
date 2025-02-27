@@ -1,6 +1,6 @@
 import { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Footer from './componentes/Footer';
 import Header from './componentes/Header';
 import Home from './componentes/Home/Home';
@@ -16,13 +16,11 @@ export default class App extends Component {
 
   render() {
     return (
-    <div>
+      <div>
       <Header />
-      {this.state.log ? <> 
-        <Home />
-        </>:  
-        <Login />
-        }
+      <>
+      { this.state.log ? <Home /> : <Login /> }
+      </>
       <Footer />
     </div>
     );
