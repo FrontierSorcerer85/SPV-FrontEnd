@@ -5,13 +5,13 @@ export default class ListaAsistencia extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      mes: '11', // Mes seleccionado
+      mes: '11', 
     };
   }
 
   render() {
     const { cursos } = this.props;
-    const { id } = this.props.params; // Acceder a los parámetros de la ruta
+    const { id } = this.props.params; 
     const curso = cursos.find(curso => curso.id === parseInt(id));
 
     if (!curso) {

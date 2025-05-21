@@ -4,19 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default class MenuCurso extends Component {
   render() {
-    const { id, cursos } = this.props;
+    const { curso, estudiantes } = this.props;
 
-    // Buscar el curso correspondiente al ID
-    const curso = cursos.find((curso) => curso.id === parseInt(id));
-
-    // Si no se encuentra el curso, mostrar un mensaje
     if (!curso) {
       return <div>Curso no encontrado</div>;
     }
 
-    // Usar el horario y los estudiantes del curso
+    // Usar horario y estudiantes del curso
     const horarios = curso.horario || [];
-    const estudiantes = curso.estudiantes || [];
     const diasSemana = ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes"];
 
     return (
@@ -27,13 +22,13 @@ export default class MenuCurso extends Component {
           {/* Sección izquierda: Lista de asistencias */}
           <div className='opcion-izquierda'>
             <h3>Lista de asistencias</h3>
-           <Link to={`/curso/${id}/asistencias`} className="btn btn-primary">Mensuales</Link>
+            <Link to={`/curso/${curso.idCurso}/asistencias`} className="btn btn-primary">Mensuales</Link>
           </div>
 
           {/* Sección derecha: Agregar asistencias */}
           <div className='opcion-derecha'>
             <h3>Agregar asistencias</h3>
-            <Link to={`/curso/${id}/planilla`} className="btn btn-primary">Diarias</Link>
+            <Link to={`/curso/${curso.idCurso}/planilla`} className="btn btn-primary">Diarias</Link>
           </div>
         </div>
 

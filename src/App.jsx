@@ -10,64 +10,92 @@ import MenuCurso from './componentes/MenuCurso/MenuCurso';
 import DetalleEstudiante from './componentes/DetallesEstudiante';
 import ListaAsistencia from './componentes/MenuCurso/ListaAsistencia';
 import AñadirAsistencia from './componentes/MenuCurso/AñadirAsistencia';
+import { obtenerCursos, obtenerEstudiantesPorCurso } from './componentes/services/api';
 
 export default class App extends Component {
   constructor(props) {
     super(props);
-    const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // Recuperar de localStorage
-    console.log("Sesión recuperada de localStorage:", isLoggedIn);
     this.state = {
-      Logeado: isLoggedIn, // Recuperar la sesión
-      cursosAsignados: [
-        { 
-          id: 1, 
-          nombre: "7°2", 
-          grado: "Septimo año",
-          horario: [
-            { hora: '08:00 - 10:00', Lunes: 'Matemáticas', Martes: 'Literatura', Miércoles: 'Ciencias', Jueves: 'Historia', Viernes: 'Educación Física' },
-            { hora: '10:00 - 12:00', Lunes: 'Física', Martes: 'Química', Miércoles: 'Biología', Jueves: 'Geografía', Viernes: 'Arte' },
-          ],
-          estudiantes: [
-            { id: 1, nombre: 'Joaquín', apellido: 'Sosa Leis', dni: '12353123', telefono: '2901123334' },
-            { id: 2, nombre: 'Kevin', apellido: 'Vargas', dni: '12333123', telefono: '2901213122' },
-          ]
-        },
-        {
-          id: 2, 
-          nombre: "1°7", 
-          grado: "Primer año",
-          horario: [
-            { hora: '08:00 - 10:00', Lunes: 'Matemáticas', Martes: 'Literatura', Miércoles: 'Ciencias', Jueves: 'Historia', Viernes: 'Educación Física' },
-            { hora: '10:00 - 12:00', Lunes: 'Física', Martes: 'Química', Miércoles: 'Biología', Jueves: 'Geografía', Viernes: 'Arte' },
-          ],
-          estudiantes: [
-            { id: 3, nombre: 'Ana', apellido: 'Gómez', dni: '45678901', telefono: '2901123335' },
-            { id: 4, nombre: 'Luis', apellido: 'Pérez', dni: '45678902', telefono: '2901213123' },
-          ]
-        },
-        // Agrega más cursos con sus respectivos estudiantes
-      ],
+      Logeado: false,
+      cursosAsignados: [], 
+      estudiantes: [], 
+      loading: true, //manejar el estado de carga
+      error: null,
     };
   }
+
+  verificarToken = () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      return false;
+    }
+    return true;
+  };
 
   // Función para iniciar sesión
   login = () => {
     this.setState({ Logeado: true }, () => {
-    localStorage.setItem('isLoggedIn', 'true');
-    console.log("Sesión guardada en localStorage:", localStorage.getItem('isLoggedIn'));
-  });
-  }
+      localStorage.setItem('isLoggedIn', 'true');
+      console.log("Sesión guardada en localStorage:", localStorage.getItem('isLoggedIn'));
+    });
+  };
 
   // Función para cerrar sesión
   logout = () => {
     this.setState({ Logeado: false }, () => {
-    localStorage.removeItem('isLoggedIn');
-    console.log("Sesión eliminada de localStorage:", localStorage.getItem('isLoggedIn'));
-  });
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('token'); // Eliminar el token al cerrar sesión
+      console.log("Sesión eliminada de localStorage:", localStorage.getItem('isLoggedIn'));
+    });
+  };
+
+  // Obtener los cursos desde el backend
+  fetchCursos = async () => {
+    try {
+      const response = await obtenerCursos();
+      console.log("Respuesta de la API:", response); // Verifica la estructura de la respuesta
+
+      // Asegúrate de que la respuesta sea un array
+      const cursos = Array.isArray(response) ? response : response.Cursos || [];
+      this.setState({ cursosAsignados: cursos, loading: false });
+    } catch (error) {
+      console.error("Error al obtener los cursos:", error);
+      this.setState({ error: "Error al cargar los cursos", loading: false });
+    }
+  };
+
+  // Obtener los estudiantes de un curso específico
+  fetchEstudiantesPorCurso = async (idCurso) => {
+    try {
+      const estudiantes = await obtenerEstudiantesPorCurso(idCurso);
+      this.setState({ estudiantes });
+    } catch (error) {
+      console.error("Error al obtener los estudiantes:", error);
+      this.setState({ estudiantes: [] });
+    }
+  };
+
+  componentDidMount() {
+    const isLoggedIn = this.verificarToken();
+    if (isLoggedIn) {
+      this.setState({ Logeado: true });
+    }
+
+    // Obtener los cursos al cargar la aplicación
+    this.fetchCursos();
   }
 
   render() {
-    const { Logeado, cursosAsignados } = this.state;
+    const { Logeado, cursosAsignados, estudiantes, loading, error } = this.state;
+
+    if (loading) {
+      return <div>Cargando...</div>; // Muestra un mensaje de carga
+    }
+
+    if (error) {
+      return <div>{error}</div>; // Muestra un mensaje de error
+    }
+
     return (
       <div>
         {/* Pasar Logeado y logout como props al Header */}
@@ -86,7 +114,29 @@ export default class App extends Component {
 
           {/* Ruta para el menú de un curso específico */}
           <Route path="/curso/:id">
-            {(params) => <MenuCurso id={params.id} cursos={cursosAsignados} />}
+            {params => {
+              const idCurso = parseInt(params.id, 10); // Obtener el idCurso de los parámetros de la URL
+              console.log("ID Curso desde la URL:", idCurso);
+
+              // Verificar que cursosAsignados sea un array
+              if (!Array.isArray(cursosAsignados)) {
+                console.error("cursosAsignados no es un array:", cursosAsignados);
+                return <div>Error: No se pudieron cargar los cursos.</div>;
+              }
+
+              // Buscar el curso específico en el array cursosAsignados
+              const curso = cursosAsignados.find(curso => curso.idCurso === idCurso);
+
+              // Si no se encuentra el curso, muestra un mensaje de error
+              if (!curso) {
+                return <div>Curso no encontrado</div>;
+              }
+
+              // Si el curso existe, obtener los estudiantes del curso
+              this.fetchEstudiantesPorCurso(idCurso);  // Obtener los estudiantes del curso seleccionado
+
+              return <MenuCurso curso={curso} estudiantes={estudiantes} />;
+            }}
           </Route>
 
           <Route path="/estudiante/:id">
@@ -100,7 +150,6 @@ export default class App extends Component {
           <Route path="/curso/:id/planilla">
             {(params) => <AñadirAsistencia params={params} cursos={cursosAsignados} />}
           </Route>
-
         </Switch>
 
         <Footer />
